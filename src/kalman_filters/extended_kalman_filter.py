@@ -17,7 +17,8 @@ class ExtendedKalmanFilter:
         """
         self.x = x  #  [3,]
         self.P = P  #  [3, 3]
-
+    
+    # EKF的更新过程，H为h(x)相对x的雅克比矩阵
     def update(self, z, Q):
         """update x and P based on observation of (x_, y_)
         Args:
@@ -40,6 +41,7 @@ class ExtendedKalmanFilter:
         # update covariance P
         self.P = self.P - K @ H @ self.P
 
+    # EKF的预测过程，G为g(x)相对x的雅克比矩阵
     def propagate(self, u, dt, R):
         """propagate x and P based on state transition model defined as eq. (5.9) in [1]
         Args:
